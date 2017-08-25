@@ -4,10 +4,16 @@ Mit meinem Raspberry Pi 3 möchte ich von diversen Webseiten regelmäßg einen S
 Sobald eine Änderung festgestellt wird, möchte ich per E-Mail informiert werden.
 
 ## Notwendige Software
+### PhantomJS
 Zunächst muss *phantomJs* installiert werden. Da das offizielle Release nicht für ARM Prozessoren 
 funktioniert, muss man wie folgt vorgehen:
 1. `git clone https://github.com/piksel/phantomjs-raspberrypi.git`
 2. `sudo ln -s /home/pi/phantomjs-raspberrypi/bin/phantomjs /bin/phantomjs`
+
+### ImageMagick
+Um Bilder vergleichen zu können, verwende ich *ImageMagick*, was sich wie folgt installieren lässt:
+`sudo apt-get install imagemagick`
+
 
 ## Nützliche Einstellungen
 Damit der Raspberry Pi in den Ruhezeiten nicht das WLAN abschaltet (Power management), muss man noch
