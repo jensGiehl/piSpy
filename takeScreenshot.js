@@ -1,6 +1,9 @@
 var page = require('webpage').create();
 var system = require('system');
 
+var d = new Date();
+var now = d.getFullYear() + "-" + ("0"+(d.getMonth()+1)).slice(-2) + "-" + ("0" + d.getDate()).slice(-2) + "_" + ("0" + d.getHours()).slice(-2) + ("0" + d.getMinutes()).slice(-2); 
+
 if (system.args.length != 4) {
 	console.log('Invalid arguments!  1. argument = URL, 2. argument = Filename for PNG, 3. argument=MOBILE/DESKTOP');
 	phantom.exit();
@@ -23,7 +26,7 @@ if (system.args.length != 4) {
 	console.log('User Agent: ' , page.settings.userAgent);
 
 	page.open(url, function() {
-		filename = imgFile + '_' + Date.now() + '.png';
+		filename = imgFile +  now + '.png';
 		page.render(filename);
 		console.log('Screenshot taken: ' + filename);
 		phantom.exit();
