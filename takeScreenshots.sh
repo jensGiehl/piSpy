@@ -44,10 +44,7 @@ while read line; do
 
     # Take mobile and desktop screenshot
     takeScreenshot ${JOB[1]} "$2/${JOB[0]}/desktop/$folder/" DESKTOP
-
-
-#    phantomjs takeScreenshot.js ${JOB[1]} "$2/${JOB[0]}/desktop/$folder/" DESKTOP
-#    phantomjs takeScreenshot.js ${JOB[1]} "$2/${JOB[0]}/mobile/$folder/" MOBILE
+    takeScreenshot ${JOB[1]} "$2/${JOB[0]}/desktop/$folder/" MOBILE
 
 done < $1
 
