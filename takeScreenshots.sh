@@ -36,15 +36,16 @@ function takeScreenshot() {
 
 # Use filename as subfolder for the output files
 IFS='.' read -ra inputFile <<< $1
-folder=${inputFile[0]}
+type=${inputFile[0]}
 
 # Read input file
 while read line; do
     IFS=';' read -ra JOB <<< $line
 
     # Take mobile and desktop screenshot
-    takeScreenshot ${JOB[1]} "$2/${JOB[0]}/desktop/$folder/" DESKTOP
-    takeScreenshot ${JOB[1]} "$2/${JOB[0]}/desktop/$folder/" MOBILE
+    echo "Folder: $2/${JOB[0]}/desktop/$type"
+    takeScreenshot ${JOB[1]} "$2/${JOB[0]}/desktop/$type/" DESKTOP
+    takeScreenshot ${JOB[1]} "$2/${JOB[0]}/mobile/$type/" MOBILE
 
 done < $1
 

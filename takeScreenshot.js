@@ -23,7 +23,6 @@ if (system.args.length != 4) {
 	}
 
 	console.log('Open URL: ' , url);
-	console.log('User Agent: ' , page.settings.userAgent);
 
 	page.open(url, function() {
 		filename = imgFile +  now + '.png';
