@@ -27,8 +27,10 @@ Das Skript `takeScreenshots.sh` muss mit zwei Parametern aufgerufen werden:
 
 ### Beispiel
 #### urls.csv
-```GitHub;https://github.com/
-Heise;https://www.heise.de/```
+```
+GitHub;https://github.com/
+Heise;https://www.heise.de/
+```
 
 #### Aufruf
 ```./takeScreenshots.sh urls.csv /home/pi/screenshots```
