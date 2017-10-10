@@ -16,10 +16,22 @@ Um Bilder vergleichen zu können, verwende ich *ImageMagick*, was sich wie folgt
 
 
 ## Verwenden
-Beispiel:
-```phantomjs takeScreenshot.js https://www.github.com /home/pi/screenshots/github/home DESKTOP```
-bzw.:
-```phantomjs takeScreenshot.js https://www.github.com /home/pi/screenshots/github/home MOBILE```
+Zunächst muss eine Datei angelegt werden, in dem folgende Informationen getrennt mit einem `;` enthalten sind:
+1. Name (wird als Ordnername verwendet)
+2. URL die aufgerufen werden soll
+
+Das Skript `takeScreenshots.sh` muss mit zwei Parametern aufgerufen werden:
+1. Datei die gelesen werden soll (hier stehen die URLs drin)
+2. Pfad in dem die Screenshots gespeichert werden sollen
+
+
+### Beispiel
+#### urls.csv
+```GitHub;https://github.com/
+Heise;https://www.heise.de/```
+
+#### Aufruf
+```./takeScreenshots.sh urls.csv /home/pi/screenshots```
 
 
 
