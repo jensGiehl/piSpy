@@ -12,7 +12,7 @@ function takeScreenshot() {
 
 
         diffName=`date '+%Y-%m-%d_%H%M'`
-        diffName="diff_$diffName.png"
+        diffName="diff_$1_$diffName.png"
 
         # Compare screenshot with an older version
         array=($( ls -t "$folder"  | head -2 ))
