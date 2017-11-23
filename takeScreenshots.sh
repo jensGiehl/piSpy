@@ -13,6 +13,7 @@ function takeScreenshot() {
 
         diffName=`date '+%Y-%m-%d_%H%M'`
         diffName="diff_$1_$diffName.png"
+        logger "Diff filename $diffName"
 
         # Compare screenshot with an older version
         array=($( ls -t "$folder"  | head -2 ))
@@ -23,7 +24,7 @@ function takeScreenshot() {
                 if [ $diffValue == "0" ];
                 then
                         # Remove newer screenshot
-			echo "Delete $folder/${array[0]}"
+			logger "Delete $folder/${array[0]}"
                         rm "$folder/${array[0]}"
                         rm $diffName
                 else
