@@ -6,26 +6,32 @@ function takeScreenshot() {
 	url=$1
 	folder=$2
 	agent=$3
+	type=$4
+	logger "Take screenshot from $1 into folder $2. Agent=$3 and type is $4"
 
 	# Take screenshot
-	phantomjs takeScreenshot.js $1 "$folder" $3
+	phantomjs takeScreenshot.js $url "$folder" $agent
 
 
-        diffName=`date '+%Y-%m-%d_%H%M'`
-        diffName="diff_$1_$diffName.png"
-        logger "Diff filename $diffName"
+	# Gen Diffname
+        currentDate=`date '+%Y-%m-%d_%H%M'`
+        diffName="diff-$type-$agent-$currentDate.png"
+        logger "Filename diff: $diffName"
 
         # Compare screenshot with an older version
-        array=($( ls -t "$folder"  | head -2 ))
+        latestFiles=($( ls -t "$folder"  | head -2 ))
+	newFile=${latestFiles[0]}
+	previousFile=${latestFiles[1]}
+	logger "LatestFiles in $folder are: $latestFiles"
         if [ ${#array[@]} -gt 1 ];
         then
-                diffValue=$( compare -metric MAE "$folder/${array[0]}" "$folder/${array[1]}" $diffName 2>&1 |head -1 |tr -d '.'|cut -f1 -d' ' )
-                logger "Compare ${array[0]} with ${array[1]}: Diff is $diffValue"
+                diffValue=$( compare -metric MAE "$folder/$newFile" "$folder/$previousFile" $diffName 2>&1 |head -1 |tr -d '.'|cut -f1 -d' ' )
+                logger "Compare $newFile with $previousFile: Diff is $diffValue"
                 if [ $diffValue == "0" ];
                 then
                         # Remove newer screenshot
-			logger "Delete $folder/${array[0]}"
-                        rm "$folder/${array[0]}"
+			logger "Delete $folder/$newFile"
+                        rm "$folder/$newFile"
                         rm $diffName
                 else
                         mkdir --parents "$folder/diff/"
@@ -44,9 +50,8 @@ while read line; do
     IFS=';' read -ra JOB <<< $line
 
     # Take mobile and desktop screenshot
-    echo "Folder: $2/${JOB[0]}/desktop/$type"
-    takeScreenshot ${JOB[1]} "$2/${JOB[0]}/desktop/$type/" DESKTOP
-    takeScreenshot ${JOB[1]} "$2/${JOB[0]}/mobile/$type/" MOBILE
+    takeScreenshot ${JOB[1]} "$2/${JOB[0]}/desktop/$type/" DESKTOP $type
+    takeScreenshot ${JOB[1]} "$2/${JOB[0]}/mobile/$type/" MOBILE $type
 
 done < $1
 
