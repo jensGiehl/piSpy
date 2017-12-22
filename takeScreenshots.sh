@@ -19,11 +19,10 @@ function takeScreenshot() {
         logger "Filename diff: $diffName"
 
         # Compare screenshot with an older version
-        latestFiles=($( ls -t "$folder"  | head -2 ))
+        latestFiles=($(ls -t "$folder" | head -2 ))
 	newFile=${latestFiles[0]}
 	previousFile=${latestFiles[1]}
-	logger "LatestFiles in $folder are: $latestFiles"
-        if [ ${#array[@]} -gt 1 ];
+        if [ ${#latestFiles[@]} -gt 1 ];
         then
                 diffValue=$( compare -metric MAE "$folder/$newFile" "$folder/$previousFile" $diffName 2>&1 |head -1 |tr -d '.'|cut -f1 -d' ' )
                 logger "Compare $newFile with $previousFile: Diff is $diffValue"
