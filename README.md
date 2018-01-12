@@ -55,3 +55,9 @@ Du möchtest deine erstellten Screenshots zählen, dann nutze folgenden Befehl:
 ```
 find . -name "*.png" | grep -v "diff" |wc -l
 ```
+
+
+## Tipp um die Gesamtgröße der Bilder anzuzeigen
+```
+find . -name "*.png" -print0 | du --files0-from=- -hc | grep -E "insgesamt|total"
+```
