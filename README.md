@@ -43,9 +43,10 @@ Sollte das WLAN nicht stabil sein, dann versucht es mal mit einem Firmware Updat
 
 ## Tipp um fehlerhafte Bilder zu löschen
 Manchmal (wenn z.B. keine Internetverbindung besteht) wird ein schwarzer Screenshot erstellt. Diese Dateien
-kann man mit folgendem Befehl löschen:
+kann man mit folgendem Befehl löschen (erste Zeile für Desktop, zweite für mobile Ansicht):
 ```
 sudo find .  -type f -name "*.png" -size 8151c -delete
+sudo find . -type f -name "*.png" -size 566c -delete
 ```
 
 
