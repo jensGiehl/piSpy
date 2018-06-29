@@ -9,6 +9,7 @@ Zunächst muss *phantomJs* installiert werden. Da das offizielle Release nicht f
 funktioniert, muss man wie folgt vorgehen:
 1. `git clone https://github.com/piksel/phantomjs-raspberrypi.git`
 2. `sudo ln -s /home/pi/phantomjs-raspberrypi/bin/phantomjs /bin/phantomjs`
+3. `sudo apt-get install -y libfontconfig` ist evtl. auch notwendig
 
 ### ImageMagick
 Um Bilder vergleichen zu können, verwende ich *ImageMagick*, was sich wie folgt installieren lässt:

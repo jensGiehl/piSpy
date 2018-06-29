@@ -24,6 +24,8 @@ if (system.args.length != 4) {
 
 	console.log('Open URL: ' , url);
 
+	page.settings.resourceTimeout = 10000;
+
 	page.open(url, function() {
 		filename = imgFile +  now + '.png';
 		page.render(filename);

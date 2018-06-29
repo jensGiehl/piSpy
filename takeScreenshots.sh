@@ -9,6 +9,10 @@ function takeScreenshot() {
 	type=$4
 	logger "Take screenshot from $1 into folder $2. Agent=$3 and type is $4"
 
+	if [[ ! -e $folder ]]; then
+		mkdir -p $folder
+	fi
+
 	# Take screenshot
 	phantomjs takeScreenshot.js $url "$folder" $agent
 
