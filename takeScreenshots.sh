@@ -19,7 +19,7 @@ function takeScreenshot() {
 
 	# Gen Diffname
         currentDate=`date '+%Y-%m-%d_%H%M'`
-        diffName="diff-$type-$agent-$currentDate.png"
+        diffName="diff-$name-$agent-$currentDate.png"
         logger "Filename diff: $diffName"
 
         # Compare screenshot with an older version
