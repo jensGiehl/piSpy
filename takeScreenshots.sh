@@ -6,8 +6,8 @@ function takeScreenshot() {
 	url=$1
 	folder=$2
 	agent=$3
-	type=$4
-	logger "Take screenshot from $1 into folder $2. Agent=$3 and type is $4"
+	name=$4
+	logger "Take screenshot from $url into folder $folder  (Agent=$agent and listname is $name)"
 
 	if [[ ! -e $folder ]]; then
 		mkdir -p "$folder"
@@ -24,10 +24,10 @@ function takeScreenshot() {
 
         # Compare screenshot with an older version
         latestFiles=($(ls -t "$folder" | head -2 ))
-	newFile=${latestFiles[0]}
-	previousFile=${latestFiles[1]}
         if [ ${#latestFiles[@]} -gt 1 ];
         then
+		newFile=${latestFiles[0]}
+		previousFile=${latestFiles[1]}
                 diffValue=$( compare -metric MAE "$folder/$newFile" "$folder/$previousFile" $diffName 2>&1 |head -1 |tr -d '.'|cut -f1 -d' ' )
                 logger "Compare $newFile with $previousFile: Diff is $diffValue"
                 if [ $diffValue == "0" ];
@@ -45,8 +45,8 @@ function takeScreenshot() {
 
 
 # Use filename as subfolder for the output files
-type="${1##*/}"
-type=`echo $type | cut -d'.' -f 1`
+name="${1##*/}"
+name=`echo $name | cut -d'.' -f 1`
 
 
 # Read input file
@@ -54,8 +54,8 @@ while read line; do
     IFS=';' read -ra JOB <<< $line
 
     # Take mobile and desktop screenshot
-    takeScreenshot ${JOB[1]} "$2/${JOB[0]}/desktop/$type/" DESKTOP $type
-    takeScreenshot ${JOB[1]} "$2/${JOB[0]}/mobile/$type/" MOBILE $type
+    takeScreenshot ${JOB[1]} "$2/${JOB[0]}/desktop/$name/" DESKTOP $type
+    takeScreenshot ${JOB[1]} "$2/${JOB[0]}/mobile/$name/" MOBILE $type
 
 done < $1
 
