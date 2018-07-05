@@ -40,7 +40,7 @@ Heise;https://www.heise.de/
 #### Zeitgesteuert aufrufen
 ```sudo crontab -e``` 
 Dann kann man einen Aufruf wie folgt eintragen:
-```0 12 * * * /home/pi/git/piSpy/takeScreenshots.sh /home/pi/git/piSpy/Artikeldetail.list /home/pi/git/piSpy/screenshots | logger```
+```0 12 * * * su -u pi /home/pi/git/piSpy/takeScreenshots.sh /home/pi/git/piSpy/Artikeldetail.list /home/pi/git/piSpy/screenshots | logger```
 
 
 ## WLAN Tipp
