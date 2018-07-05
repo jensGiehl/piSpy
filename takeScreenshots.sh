@@ -1,6 +1,9 @@
 #!/bin/bash
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
 logger "Read file $1"
 logger "Save screenshots in $2"
+logger "Script root dir: $DIR"
 
 function takeScreenshot() {
 	url=$1
@@ -14,7 +17,7 @@ function takeScreenshot() {
 	fi
 
 	# Take screenshot
-	timeout 45s phantomjs takeScreenshot.js $url "$folder" $agent
+	timeout 45s phantomjs "$DIR/takeScreenshot.js" $url "$folder" $agent
 
 
 	# Gen Diffname
