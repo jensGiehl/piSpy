@@ -45,8 +45,9 @@ function takeScreenshot() {
 
 
 # Use filename as subfolder for the output files
-IFS='.' read -ra inputFile <<< $1
-type=${inputFile[0]}
+type="${1##*/}"
+type=`echo $type | cut -d'.' -f 1`
+
 
 # Read input file
 while read line; do
