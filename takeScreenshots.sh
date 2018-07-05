@@ -1,4 +1,25 @@
 #!/bin/bash
+
+if ! [ -x "$(command -v compare)" ]; then
+    echo 'Error: imagemagick is not installed.' >&2
+    exit 1
+fi
+
+if ! [ -x "$(command -v phantomjs)" ]; then
+    echo 'Error: phantomJs is not installed.' >&2
+    exit 1
+fi
+
+if ! [ $# -eq 2 ]; then
+    echo "Need two parameters: 1. Filename of the urls 2. Folder to store screenshots"
+    exit 1
+fi
+
+if [ ! -f $1 ]; then
+    echo "$1 not found!"
+    exit 1
+fi
+
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 logger "Read file $1"
@@ -32,11 +53,11 @@ function takeScreenshot() {
 		newFile=${latestFiles[0]}
 		previousFile=${latestFiles[1]}
                 diffValue=$( compare -metric MAE "$folder/$newFile" "$folder/$previousFile" $diffName 2>&1 |head -1 |tr -d '.'|cut -f1 -d' ' )
-                logger "Compare $newFile with $previousFile: Diff is $diffValue"
+                logger "Compare ${folder}/${newFile} with ${folder}/${previousFile}: Diff is ${diffValue}"
                 if [ $diffValue == "0" ];
                 then
                         # Remove newer screenshot
-			logger "Delete $folder/$newFile"
+			logger "Delete ${folder}/${newFile} (no diff)"
                         rm "$folder/$newFile"
                         rm $diffName
                 else
